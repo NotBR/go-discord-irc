@@ -79,6 +79,7 @@ type ConnectParams struct {
 	Nick     string
 	Username string
 	RealName string
+	LocalAddr string
 
 	WebIRCSuffix string
 
@@ -94,6 +95,8 @@ func (v *Varys) Connect(params ConnectParams, _ *struct{}) error {
 	// TLS things, and the server password
 	conn.Password = v.connConfig.ServerPassword
 	conn.UseTLS = v.connConfig.UseTLS
+	conn.LocalAddr = params.LocalAddr
+	
 	if v.connConfig.InsecureSkipVerify {
 		conn.TLSConfig = &tls.Config{
 			InsecureSkipVerify: true,

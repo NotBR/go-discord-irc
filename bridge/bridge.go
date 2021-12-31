@@ -33,6 +33,9 @@ type Config struct {
 	DiscordIgnores  map[string]struct{} // Discord user IDs to not bridge
 	DiscordAllowed  map[string]struct{} // Discord user IDs to only bridge
 	ConnectionLimit int                 // number of IRC connections we can spawn
+	
+	UseIPv6		bool		    // to use smart IPv6 mapping or not
+	BaseIP		string		    // the base IP range for connections
 
 	IRCPuppetPrejoinCommands   []string
 	IRCListenerPrejoinCommands []string
@@ -303,6 +306,8 @@ func (b *Bridge) SetupIRCConnection(con *irc.Connection, hostname, ip string) {
 			InsecureSkipVerify: b.Config.InsecureSkipVerify,
 		}
 	}
+	
+	con.LocalAddr = ip
 
 	// On kick, rejoin the channel
 	con.AddCallback("KICK", func(e *irc.Event) {

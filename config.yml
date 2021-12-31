@@ -28,6 +28,10 @@ no_tls: false
 debug: false
 simple: false
 
+# Smart IPv6 mapping
+useipv6: true
+baseip: "aaaa:bbbb:cccc:dddd:ffff"
+
 # irc_listener_prejoin_commands:
 #   - PART #forced-to-join-test-channel
 #   - PRIVMSG Nick :msg

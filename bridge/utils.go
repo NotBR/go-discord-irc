@@ -1,12 +1,11 @@
 package bridge
 
 import (
-	"strconv"
+	"fmt"
 	"strings"
 	"unicode"
 	"unicode/utf8"
-
-	"github.com/pkg/errors"
+	"hash/crc32"
 )
 
 // Leftpad is from github.com/douglarek/leftpad
@@ -24,18 +23,14 @@ func Leftpad(s string, length int, ch ...rune) string {
 
 // SnowflakeToIP takes a snowflake and the first half of an IP to make an IP suitable for WEBIRC
 func SnowflakeToIP(base string, snowflake string) string {
-	num, err := strconv.ParseUint(snowflake, 10, 64)
-	if err != nil {
-		panic(errors.Wrap(err, "could not convert snowflake to uint"))
-	}
-
-	for i, c := range Leftpad(strconv.FormatUint(num, 16), 16, '0') {
+	num := crc32.ChecksumIEEE([]byte(snowflake))
+	s := fmt.Sprintf("%x", num)
+	for i, c := range Leftpad(s, 8, '0') {
 		if (i % 4) == 0 {
 			base += ":"
 		}
 		base += string(c)
 	}
-
 	return base
 }
 

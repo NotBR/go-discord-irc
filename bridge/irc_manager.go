@@ -217,7 +217,7 @@ func (m *IRCManager) HandleUser(user DiscordUser) {
 
 	var ip string
 	{
-		baseip := "fd75:f5f5:226f:"
+		baseip := m.bridge.Config.BaseIP+":"
 		if user.Bot {
 			baseip += "2"
 		} else {
@@ -248,6 +248,13 @@ func (m *IRCManager) HandleUser(user DiscordUser) {
 	if DevMode {
 		fmt.Println("Incrementing total connections. It's now", len(m.ircConnections))
 	}
+	
+	var bindip string 
+	{
+		if m.bridge.Config.UseIPv6 == true {
+			bindip = ip
+		}
+	}
 
 	err := m.varys.Connect(varys.ConnectParams{
 		UID: user.ID,
@@ -255,6 +262,8 @@ func (m *IRCManager) HandleUser(user DiscordUser) {
 		Nick:     nick,
 		Username: username,
 		RealName: user.Username,
+		
+		LocalAddr: bindip,
 
 		WebIRCSuffix: fmt.Sprintf("discord %s %s", hostname, ip),
 

@@ -25,6 +25,7 @@ func main() {
 	debugMode := flag.Bool("debug", false, "Debug mode? (false = use value from settings)")
 	notls := flag.Bool("no-tls", false, "Avoids using TLS att all when connecting to IRC server ")
 	insecure := flag.Bool("insecure", false, "Skip TLS certificate verification? (INSECURE MODE) (false = use value from settings)")
+	useIPv6 := flag.Bool("useipv6", false, "Use smart IPv6 mapping")
 
 	// Secret devmode
 	devMode := flag.Bool("dev", false, "")
@@ -85,6 +86,7 @@ func main() {
 	rawIRCFilter := viper.GetStringSlice("irc_message_filter")         // Ignore lines containing matched text from IRC
 	rawDiscordFilter := viper.GetStringSlice("discord_message_filter") // Ignore lines containing matched text from Discord
 	connectionLimit := viper.GetInt("connection_limit")                // Limiter on how many IRC Connections we can spawn
+	baseIP := viper.GetString("baseip")				   // Base IP Range
 	//
 	if !*debugMode {
 		*debugMode = viper.GetBool("debug")
@@ -95,6 +97,10 @@ func main() {
 	}
 	if !*insecure {
 		*insecure = viper.GetBool("insecure")
+	}
+	//
+	if !*useIPv6 {
+		*useIPv6 = viper.GetBool("useipv6")
 	}
 	//
 	viper.SetDefault("irc_puppet_prejoin_commands", []string{"MODE ${NICK} +D"})
@@ -156,6 +162,8 @@ func main() {
 		IRCPuppetPrejoinCommands:   ircPuppetPrejoinCommands,
 		IRCListenerPrejoinCommands: ircListenerPrejoinCommands,
 		ConnectionLimit:            connectionLimit,
+		UseIPv6:		    *useIPv6,
+		BaseIP:                     baseIP,
 		IRCIgnores:                 matchers,
 		IRCFilteredMessages:        ircFilter,
 		DiscordIgnores:             stringSliceToMap(rawDiscordIgnores),
