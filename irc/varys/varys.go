@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	irc "github.com/qaisjp/go-ircevent"
+	irc "github.com/NotBR/go-ircevent"
 )
 
 type Varys struct {

@@ -13,8 +13,8 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/gobwas/glob"
 	"github.com/pkg/errors"
-	"github.com/qaisjp/go-discord-irc/bridge"
-	ircnick "github.com/qaisjp/go-discord-irc/irc/nick"
+	"github.com/NotBR/go-discord-irc/bridge"
+	ircnick "github.com/NotBR/go-discord-irc/irc/nick"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

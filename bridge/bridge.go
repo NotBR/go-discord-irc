@@ -10,8 +10,8 @@ import (
 	"github.com/gobwas/glob"
 	"github.com/matterbridge/discordgo"
 	"github.com/pkg/errors"
-	"github.com/qaisjp/go-discord-irc/irc/varys"
-	irc "github.com/qaisjp/go-ircevent"
+	"github.com/NotBR/go-discord-irc/irc/varys"
+	irc "github.com/NotBR/go-ircevent"
 	log "github.com/sirupsen/logrus"
 )
 

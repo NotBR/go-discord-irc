@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	ircf "github.com/qaisjp/go-discord-irc/irc/format"
-	irc "github.com/qaisjp/go-ircevent"
+	ircf "github.com/NotBR/go-discord-irc/irc/format"
+	irc "github.com/NotBR/go-ircevent"
 	log "github.com/sirupsen/logrus"
 )
 

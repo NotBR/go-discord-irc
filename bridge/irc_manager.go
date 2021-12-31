@@ -9,9 +9,9 @@ import (
 	"github.com/mozillazg/go-unidecode"
 	"github.com/pkg/errors"
 
-	ircnick "github.com/qaisjp/go-discord-irc/irc/nick"
-	"github.com/qaisjp/go-discord-irc/irc/varys"
-	irc "github.com/qaisjp/go-ircevent"
+	ircnick "github.com/NotBR/go-discord-irc/irc/nick"
+	"github.com/NotBR/go-discord-irc/irc/varys"
+	irc "github.com/NotBR/go-ircevent"
 	log "github.com/sirupsen/logrus"
 )
 
